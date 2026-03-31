@@ -1,30 +1,40 @@
+import allure
 import requests
-from data.test_data import BASE_URL
+from data.urls import REGISTER_ENDPOINT, LOGIN_ENDPOINT, LOGOUT_ENDPOINT, USER_ENDPOINT
 
+@allure.step("Отправить запрос на регистрацию пользователя")
 def create_user(data):
-    """Регистрация пользователя - POST /api/auth/register"""
-    return requests.post(f"{BASE_URL}/auth/register", json=data)
+    """Регистрация пользователя"""
+    return requests.post(REGISTER_ENDPOINT, json=data)
 
+@allure.step("Отправить запрос на авторизацию пользователя")
 def login_user(data):
-    """Авторизация пользователя - POST /api/auth/login"""
-    return requests.post(f"{BASE_URL}/auth/login", json=data)
+    """Авторизация пользователя"""
+    return requests.post(LOGIN_ENDPOINT, json=data)
 
+
+@allure.step("Отправить запрос на выход из системы")
 def logout_user(refresh_token):
-    """Выход из системы - POST /api/auth/logout"""
+    """Выход из системы"""
     data = {"token": refresh_token}
-    return requests.post(f"{BASE_URL}/auth/logout", json=data)
+    return requests.post(LOGOUT_ENDPOINT, json=data)
 
+
+@allure.step("Отправить запрос на получение данных пользователя")
 def get_user_info(token):
-    """Получение данных пользователя - GET /api/auth/user"""
+    """Получение данных пользователя"""
     headers = {"Authorization": token}
-    return requests.get(f"{BASE_URL}/auth/user", headers=headers)
+    return requests.get(USER_ENDPOINT, headers=headers)
 
+@allure.step("Отправить запрос на обновление данных пользователя")
 def update_user_info(token, data):
-    """Обновление данных пользователя - PATCH /api/auth/user"""
+    """Обновление данных пользователя"""
     headers = {"Authorization": token}
-    return requests.patch(f"{BASE_URL}/auth/user", headers=headers, json=data)
+    return requests.patch(USER_ENDPOINT, headers=headers, json=data)
 
+
+@allure.step("Отправить запрос на удаление пользователя")
 def delete_user(token):
-    """Удаление пользователя - DELETE /api/auth/user"""
+    """Удаление пользователя"""
     headers = {"Authorization": token}
-    return requests.delete(f"{BASE_URL}/auth/user", headers=headers)
+    return requests.delete(USER_ENDPOINT, headers=headers)

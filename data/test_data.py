@@ -1,7 +1,5 @@
 import uuid
 
-BASE_URL = "https://stellarburgers.education-services.ru/api"
-
 def generate_unique_user():
     email = f"user_{uuid.uuid4()}@test.com"
     return {
@@ -16,3 +14,9 @@ VALID_INGREDIENTS = [
 ]
 
 INVALID_INGREDIENTS = ["invalid_hash_123"]
+
+# Ожидаемые сообщения об ошибках
+ERROR_USER_EXISTS = "User already exists"
+ERROR_REQUIRED_FIELDS = "Email, password and name are required fields"
+ERROR_INVALID_CREDENTIALS = "email or password are incorrect"
+ERROR_NO_INGREDIENTS = "Ingredient ids must be provided"
